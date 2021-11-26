@@ -5,10 +5,13 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1.BaseDeDados;
+using WindowsFormsApp1.Entidade;
 
 namespace WindowsFormsApp1
 {
@@ -21,30 +24,38 @@ namespace WindowsFormsApp1
 
         private void Consultar_Click(object sender, EventArgs e)
         {
-            string con = ConfigurationManager.ConnectionStrings["MySQLConnectionString"].ToString();
-
-            MySqlConnection conexao = new MySqlConnection(con);
+            ListViewItem.Items.Clear();
             
-            try
-            {
-                conexao.Open();
-                MessageBox.Show("Se conectoou com sucesso ao banco de dados", "Alerta");
-                MySqlCommand comando = conexao.CreateCommand();
-                comando.CommandText = "Select * from usuario where id = 1";
-                var reader = comando.ExecuteReader();
+            ListViewItem.View = View.Details;
+            string filtro = TextBoxFiltro.Text;
 
-                while(reader.Read())
+            if (!string.IsNullOrEmpty(filtro))
+            {
+                List<Item> listaFiltrada = BD.ListaFiltrada(filtro);
+
+                foreach(Item unidade in listaFiltrada )
                 {
-                    MessageBox.Show(reader["nome"].ToString());
+                    ListViewItem listView = new ListViewItem();
+                    listView.SubItems.Add(unidade.getTexto());
+                    listView.SubItems.Add(unidade.getValor().ToString("F2",CultureInfo.InvariantCulture));
+                    listView.SubItems.Add(unidade.getData().ToString());
+                    ListViewItem.Items.Add(listView);
                 }
+                
             }
-            catch (MySqlException erro)
+        }
+
+        private void Form_Load(object sender, EventArgs e)
+        {
+            List<Item> lista = BD.RetornaLista();
+            ListViewItem.View = View.Details;
+            foreach (Item unidade in lista)
             {
-                MessageBox.Show("Erro ao conectar " + erro.Message,"Alerta");
-            }
-            finally
-            {
-                conexao.Close();
+                ListViewItem listView = new ListViewItem();
+                listView.SubItems.Add(unidade.getTexto());
+                listView.SubItems.Add(unidade.getValor().ToString("F2", CultureInfo.InvariantCulture));
+                listView.SubItems.Add(unidade.getData().ToString());
+                ListViewItem.Items.Add(listView);
             }
         }
     }
