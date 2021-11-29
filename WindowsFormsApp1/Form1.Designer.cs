@@ -30,10 +30,10 @@
         {
             this.ButtonConsultar = new System.Windows.Forms.Button();
             this.ListViewItem = new System.Windows.Forms.ListView();
-            this.TextBoxFiltro = new System.Windows.Forms.TextBox();
             this.Texto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Valor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Data = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TextBoxFiltro = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // ButtonConsultar
@@ -58,17 +58,12 @@
             this.ListViewItem.Size = new System.Drawing.Size(341, 387);
             this.ListViewItem.TabIndex = 1;
             this.ListViewItem.UseCompatibleStateImageBehavior = false;
-            // 
-            // TextBoxFiltro
-            // 
-            this.TextBoxFiltro.Location = new System.Drawing.Point(422, 32);
-            this.TextBoxFiltro.Name = "TextBoxFiltro";
-            this.TextBoxFiltro.Size = new System.Drawing.Size(328, 20);
-            this.TextBoxFiltro.TabIndex = 2;
+            this.ListViewItem.SelectedIndexChanged += new System.EventHandler(this.Form_Load);
             // 
             // Texto
             // 
             this.Texto.Text = "Texto";
+            this.Texto.Width = 120;
             // 
             // Valor
             // 
@@ -77,6 +72,14 @@
             // Data
             // 
             this.Data.Text = "Data";
+            this.Data.Width = 120;
+            // 
+            // TextBoxFiltro
+            // 
+            this.TextBoxFiltro.Location = new System.Drawing.Point(422, 32);
+            this.TextBoxFiltro.Name = "TextBoxFiltro";
+            this.TextBoxFiltro.Size = new System.Drawing.Size(328, 20);
+            this.TextBoxFiltro.TabIndex = 2;
             // 
             // Form
             // 

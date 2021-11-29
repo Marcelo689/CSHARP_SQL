@@ -36,7 +36,8 @@ namespace WindowsFormsApp1
                 foreach(Item unidade in listaFiltrada )
                 {
                     ListViewItem listView = new ListViewItem();
-                    listView.SubItems.Add(unidade.getTexto());
+
+                    listView.SubItems[0].Text = unidade.getTexto();
                     listView.SubItems.Add(unidade.getValor().ToString("F2",CultureInfo.InvariantCulture));
                     listView.SubItems.Add(unidade.getData().ToString());
                     ListViewItem.Items.Add(listView);
@@ -52,7 +53,7 @@ namespace WindowsFormsApp1
             foreach (Item unidade in lista)
             {
                 ListViewItem listView = new ListViewItem();
-                listView.SubItems.Add(unidade.getTexto());
+                listView.SubItems[0].Text = unidade.getTexto();
                 listView.SubItems.Add(unidade.getValor().ToString("F2", CultureInfo.InvariantCulture));
                 listView.SubItems.Add(unidade.getData().ToString());
                 ListViewItem.Items.Add(listView);
